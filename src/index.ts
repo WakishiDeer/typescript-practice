@@ -1,17 +1,34 @@
-type Filter<T> = {
-    (array: T[], f: (item: T) => boolean): T[]
+// interface
+interface Shoe {
+    purpose: string
 }
 
-let filter: Filter<number | string> = (array, f) => {
-    let result = []
-    for (let i = 0; i < array.length; i++){
-        let item = array[i]
-        if(f(item)){
-            result.push(item)
+// class
+class BalletFlat implements Shoe {
+    purpose = 'dancing'
+}
+
+class Boot implements Shoe {
+    purpose = 'woodcutting'
+}
+
+class Sneaker implements Shoe {
+    purpose = 'walking'
+}
+
+// main part
+let Shoe = {
+    create(type: 'balletFlat' | 'boot' | 'sneaker'): Shoe {
+        switch (type) {
+            case 'balletFlat':
+                return new BalletFlat
+            case 'boot':
+                return new Boot
+            case 'sneaker':
+                return new Sneaker
         }
     }
-    return result
 }
 
-console.log(filter([1, 2, 3, 4], _ => _ < 3))
-console.log(filter(['a', 'b', 'c'], _ => _ !=='b'))
+let s: Shoe = Shoe.create('balletFlat')
+console.log(s.purpose)
