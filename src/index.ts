@@ -1,34 +1,20 @@
-// interface
-interface Shoe {
-    purpose: string
-}
+class RequestBuilder {
+    private url: string | null = null
+    private method: 'get' | 'post' | null = null
+    private data: object | null = null
 
-// class
-class BalletFlat implements Shoe {
-    purpose = 'dancing'
-}
+    setMethod(method: 'get' | 'post'): this {
+        this.method = method
+        return this
+    }
 
-class Boot implements Shoe {
-    purpose = 'woodcutting'
-}
+    setData(data: object): this {
+        this.data = data
+        return this
+    }
 
-class Sneaker implements Shoe {
-    purpose = 'walking'
-}
-
-// main part
-let Shoe = {
-    create(type: 'balletFlat' | 'boot' | 'sneaker'): Shoe {
-        switch (type) {
-            case 'balletFlat':
-                return new BalletFlat
-            case 'boot':
-                return new Boot
-            case 'sneaker':
-                return new Sneaker
-        }
+    setURL(url: string): this {
+        this.url = url
+        return this
     }
 }
-
-let s: Shoe = Shoe.create('balletFlat')
-console.log(s.purpose)
